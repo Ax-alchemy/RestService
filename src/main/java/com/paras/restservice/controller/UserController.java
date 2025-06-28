@@ -17,12 +17,20 @@ public class UserController {
     Deque<User> users = new ArrayDeque<>();
 
     @GetMapping("/{id}")
-    public User getUser(@PathVariable Long id) {
+    public User getUserById(@PathVariable Long id) {
 
         return users.stream()
                 .filter(u->u.getId()==id)
                 .findFirst()
                 .orElse(null);
+    }
+
+    @GetMapping
+    public User getUser(){
+        if(!users.isEmpty()){
+            return users.peek();
+        }
+        return null;
     }
 
     @PostMapping
